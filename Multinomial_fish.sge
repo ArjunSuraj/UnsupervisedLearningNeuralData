@@ -1,0 +1,28 @@
+#!/bin/bash
+#Task Array example for MATLAB on Sheffield's ShARC system
+#Request 4 Gigabytes of memory per task
+#$ -l rmem=16G
+#Run 10 tasks where each task has a different $SGE_TASK_ID ranging from 1 to 10
+#$ -t 1-30
+#$ -o /home/acp20asl/logs
+#$ -e /home/acp20asl/logs
+#$ -M aslaguduvarameshbabu1@sheffield.ac.uk
+#$ -m a
+#Output the Task ID
+echo "Task ID is $SGE_TASK_ID"
+
+cd /mnt/fastdata/acp20asl/acp20asl/UnsupervisedLearningNeuralData/
+
+module load apps/python/conda
+
+module load libs/cudnn/7.3.1.20/binary-cuda-9.0.176
+
+source activate /data/acp20asl/.conda-sharc/pytorch
+
+module load libs/gsl/2.4/gcc-8.2
+
+#for i in {1..19}
+#do
+#Run myfunc.m, passing $SGE_TASK_ID to it 
+python Multinomial_fish.py $SGE_TASK_ID >> /mnt/fastdata/acp20asl/acp20asl/UnsupervisedLearningNeuralData/fish_output_Multinomial.txt
+#done

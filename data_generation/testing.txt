@@ -1,0 +1,4 @@
+Initialized python and numpy
+reading in args start
+before lambda
+after lambda
